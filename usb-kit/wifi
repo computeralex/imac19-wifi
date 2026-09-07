@@ -1,6 +1,6 @@
 #!/bin/bash
 # Wi-Fi installer for 2019 iMacs on Omarchy (iMac19,2 / iMac19,1).
-# Drag this file to Home, then: sudo bash ~/wifi
+# Drag this file to Home, then: sudo bash ~/wifi.txt
 set -euo pipefail
 
 if [[ ${EUID} -ne 0 ]]; then
