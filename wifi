@@ -1,9 +1,6 @@
 #!/bin/bash
-# One-file Wi-Fi installer for 2019 iMacs on Omarchy (iMac19,2 / iMac19,1).
-#
-# Get this file onto the iMac however you can. Plug in the USB stick you
-# used to install Omarchy, then:
-#   sudo bash imac19-wifi-install.sh
+# Wi-Fi installer for 2019 iMacs on Omarchy (iMac19,2 / iMac19,1).
+# Drag this file to Home, then: sudo bash ~/wifi
 set -euo pipefail
 
 if [[ ${EUID} -ne 0 ]]; then

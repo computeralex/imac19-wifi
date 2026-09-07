@@ -1,15 +1,6 @@
-Keep this on your phone too. The iMac has no Wi-Fi yet.
+Keep this on your phone. Super is the Command key.
 
-On a Mac keyboard, Super is the Command key (next to the spacebar).
-
-1. Plug in THIS stick.
-2. Press Command + Shift + F (Files). Click the USB in the left sidebar.
-3. Drag imac19-wifi-install.sh onto Home (house icon).
-4. Press Command + Return (terminal). Type:
-
-   sudo bash ~/imac19-wifi-install.sh
-
-5. Type the Omarchy password. Nothing will show. Press Return.
-6. When it asks, unplug this stick if you need the port, plug in the
-   Omarchy INSTALLER USB, press Return.
-7. When it says done, press Return to shut down. Screen black, then power.
+1. Download the file named wifi onto a USB stick.
+2. On the iMac: Command + Shift + F (Files). Click the USB. Drag wifi onto Home.
+3. Command + Return. Type:  sudo bash ~/wifi
+4. Password (nothing shows). When it asks, plug in the Omarchy installer USB.

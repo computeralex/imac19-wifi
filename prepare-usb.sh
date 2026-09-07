@@ -74,11 +74,10 @@ copy_kit() {
   }
   [[ -f "$KIT/firmware/nihau.tar" ]] || fetch_firmware
   mkdir -p "$dest/firmware"
-  cp "$KIT/imac19-wifi-install.sh" "$dest/"
-  cp "$KIT/Install Wi-Fi.desktop" "$dest/"
+  cp "$ROOT/wifi" "$dest/"
   cp "$KIT/README.txt" "$dest/"
   cp "$KIT/firmware/nihau.tar" "$KIT/firmware/midway.tar" "$dest/firmware/"
-  chmod +x "$dest/imac19-wifi-install.sh" || true
+  chmod +x "$dest/wifi" || true
   echo "Copied installer to $dest"
   echo "Eject the stick, plug it into the iMac, open Files, double-click Install Wi-Fi."
 }
