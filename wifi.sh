@@ -1,5 +1,6 @@
 #!/bin/bash
 # Wi-Fi installer for 2019 iMacs on Omarchy (iMac19,2 / iMac19,1).
+# Version 0.4
 # Drag this file to Home, then: sudo bash ~/wifi.sh
 set -euo pipefail
 

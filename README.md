@@ -44,3 +44,7 @@ If it cannot find the firmware package, reseat the installer and press Return ag
 When it finishes, press Return to shut down. Power on after the screen goes black.
 
 Network panel: **Super (⌘) + Ctrl + W**.
+
+## License
+
+MIT. Version 0.4.
