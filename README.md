@@ -2,7 +2,7 @@
 
 You installed Omarchy on a 2019 iMac. Wi-Fi does not show up. That is expected.
 
-Keep this page on your phone. The iMac cannot load it until Wi-Fi works.
+Keep this where you can see it if you cannot memorize it. The iMac cannot load this page until Wi-Fi works.
 
 On a Mac keyboard, **Super** is the Command key (next to the spacebar).
 
