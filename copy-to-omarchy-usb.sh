@@ -5,7 +5,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-SCRIPT="$ROOT/wifi"
+SCRIPT="$ROOT/wifi.sh"
 DESKTOP="$ROOT/usb-kit/Install Wi-Fi.desktop"
 LABEL=IMACWIFI
 SIZE_MB=32
@@ -75,11 +75,11 @@ fi
 [[ -d "$VOL" ]] || { echo "Could not mount $LABEL"; exit 1; }
 
 mkdir -p "$VOL"
-cp "$SCRIPT" "$VOL/wifi"
-chmod +x "$VOL/wifi" || true
+cp "$SCRIPT" "$VOL/wifi.sh"
+chmod +x "$VOL/wifi.sh" || true
 sync
 diskutil unmount "$VOL" || true
 
 echo
 echo "Done. The Omarchy ISO and EFI boot files were not rewritten."
-echo "On the iMac: drag wifi to Home, then: sudo bash ~/wifi"
+echo "On the iMac: drag wifi.sh to Home, then: sudo bash ~/wifi.sh"
