@@ -18,19 +18,24 @@ https://raw.githubusercontent.com/computeralex/imac19-wifi/main/imac19-wifi-inst
 
 Save it onto the second USB stick. The file name should stay `imac19-wifi-install.sh`. Put it in the top level of the stick, not inside a folder.
 
-## 2. On the iMac, open a terminal
+## 2. Copy the file onto the iMac
+
+Omarchy does not pop up a window when you plug in a USB stick. The stick just appears in Files.
 
 On a Mac keyboard, **Super** is the Command key (the one with the loop, next to the spacebar).
 
 1. Plug in the second USB stick (the one with the script).
-2. Press **Command + Return** (that's Super + Return). A terminal window opens.
+2. Press **Command + Shift + F** (that's Super + Shift + F). Files opens.
+3. Click the USB stick in the left sidebar.
+4. Drag `imac19-wifi-install.sh` onto **Home** in the left sidebar (the house icon).
 
-## 3. Run this command
+## 3. Run it
 
-Type this line and press Return. Spaces and slashes matter:
+1. Press **Command + Return**. A terminal opens.
+2. Type this and press Return:
 
 ```bash
-sudo bash $(find /run/media /media /mnt -name imac19-wifi-install.sh -print -quit)
+sudo bash ~/imac19-wifi-install.sh
 ```
 
 It will ask for **this computer's password** (the one you chose during the Omarchy install). Nothing will appear as you type. That is normal. Press Return when you are done.
@@ -53,9 +58,7 @@ When the screen is black, press the power button. After it comes up, Wi-Fi shoul
 
 ## If the command says "No such file"
 
-The script is not on the stick, or it is nested in a folder. Put `imac19-wifi-install.sh` in the top level of the second stick and try step 3 again.
-
-Files is **Command + Shift + F**. The USB shows up in the left sidebar. That is only to check the file is there. Running it still happens in the terminal.
+The file is not in Home. In Files, open Home and confirm `imac19-wifi-install.sh` is sitting there, not inside a folder. Drag it from the USB again if needed.
 
 ## If Wi-Fi still does not appear
 
