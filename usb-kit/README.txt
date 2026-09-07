@@ -6,13 +6,14 @@ No internet or ethernet needed.
 
 On the iMac
 -----------
-1. Plug in this USB stick.
-2. Open Files (folder icon in the dock, or Super+F).
-3. Click the USB stick in the left sidebar.
-4. Double-click "Install Wi-Fi".
-5. Type this computer's password. Nothing will appear as you type; that is normal.
-6. Press Enter when it says to shut down.
-7. When the screen is black, press the power button.
+Keep the USB stick you installed Omarchy from. You will need it.
+
+1. Plug in this stick (the one with this README).
+2. Open Files, open a terminal here, run:  sudo bash imac19-wifi-install.sh
+3. When it asks, plug in the Omarchy installer USB and press Enter.
+   You can unplug this stick first if you only have one port.
+4. Type this computer's password. Nothing will appear as you type.
+5. Press Enter to shut down. When the screen is black, press the power button.
 
 If double-click opens a text file instead
 -----------------------------------------
@@ -23,12 +24,6 @@ Or right-click empty space in the USB window -> Open in Terminal, then type:
 
   sudo bash imac19-wifi-install.sh
 
-Prepare this stick (on a Mac or PC that has internet)
------------------------------------------------------
-Do not use the Omarchy install ISO for this. Leave that stick alone.
-
-From the imac19-wifi folder:
-
-  ./prepare-usb.sh "/Volumes/YOURSTICK"
-
-On a Mac you can double-click "Prepare USB.command" and pick this stick.
+You also need the USB stick you installed Omarchy from.
+When the script asks, plug that installer in and press Enter.
+Do not rewrite the Omarchy installer.

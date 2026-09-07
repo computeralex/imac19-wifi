@@ -1,13 +1,9 @@
 #!/bin/bash
 # One-file Wi-Fi installer for 2019 iMacs on Omarchy (iMac19,2 / iMac19,1).
 #
-# Copy this file onto a USB stick, plug it into the iMac, and:
+# Get this file onto the iMac however you can. Plug in the USB stick you
+# used to install Omarchy, then:
 #   sudo bash imac19-wifi-install.sh
-#
-# Firmware comes from, in order:
-#   1. firmware/nihau.tar or midway.tar next to this script
-#   2. apple-bcm-firmware on a live Omarchy ISO
-#   3. that same package inside the Omarchy install USB (squashfs offline mirror)
 set -euo pipefail
 
 if [[ ${EUID} -ne 0 ]]; then
@@ -31,17 +27,34 @@ if [[ ${EUID} -ne 0 ]]; then
   exec sudo -k bash "$0" "$@"
 fi
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
+SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [[ "${IMAC19_WIFI_REEXEC:-}" != 1 ]]; then
+  cp "$0" /tmp/imac19-wifi-install.sh
+  rm -rf /tmp/imac19-wifi-kit
+  mkdir -p /tmp/imac19-wifi-kit
+  if [[ -d "$SRC_DIR/firmware" ]]; then
+    cp -a "$SRC_DIR/firmware" /tmp/imac19-wifi-kit/firmware
+  fi
+  export IMAC19_WIFI_REEXEC=1
+  exec bash /tmp/imac19-wifi-install.sh
+fi
+HERE=/tmp/imac19-wifi-kit
+
 MODEL="$(cat /sys/class/dmi/id/product_name 2>/dev/null || echo unknown)"
 FW=/usr/lib/firmware/brcm
 WORK="$(mktemp -d)"
 MOUNTS=()
 
-cleanup() {
+unmount_scans() {
   local m
   for m in "${MOUNTS[@]+"${MOUNTS[@]}"}"; do
     umount "$m" 2>/dev/null || true
   done
+  MOUNTS=()
+}
+
+cleanup() {
+  unmount_scans
   rm -rf "$WORK"
 }
 trap cleanup EXIT
@@ -167,11 +180,21 @@ if [[ -f "$TAR" ]]; then
   tar -xf "$TAR" -C "$WORK/from-tar"
   install_from_brcm_dir "$WORK/from-tar/usr/lib/firmware/brcm"
 else
-  echo "  Looking for apple-bcm-firmware on the Omarchy install USB..."
-  PKG="$(find_apple_pkg || true)"
-  [[ -n "${PKG:-}" ]] || die "Could not find apple-bcm-firmware.
-  Plug in the USB stick you used to install Omarchy, then run this again.
-  (The package lives in the ISO offline mirror; it is not installed on this iMac automatically.)"
+  echo "  Need the USB stick you used to install Omarchy."
+  echo "  Plug it in now (you can unplug the stick that has this script)."
+  echo
+  PKG=""
+  while [[ -z "${PKG:-}" ]]; do
+    read -r -p "  Press Enter when the Omarchy installer USB is plugged in..."
+    unmount_scans
+    echo "  Looking..."
+    PKG="$(find_apple_pkg || true)"
+    if [[ -z "${PKG:-}" ]]; then
+      echo
+      echo "  Could not find it. Use the same stick you installed Omarchy from."
+      echo
+    fi
+  done
   echo "  Found $PKG"
   mkdir -p "$WORK/pkg"
   if tar --zstd -xf "$PKG" -C "$WORK/pkg" 2>/dev/null; then

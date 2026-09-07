@@ -1,32 +1,33 @@
 # 2019 iMac Wi-Fi for Omarchy
 
-Wi-Fi firmware installer for the 2019 21.5-inch iMac (`iMac19,2`) and 2019 27-inch iMac (`iMac19,1`) running Omarchy.
+You installed Omarchy on a 2019 iMac. Wi-Fi does not show up. That is expected.
 
-Omarchy's install USB contains `apple-bcm-firmware` (for T2 Macs) but only **bind-mounts** that package cache during setup. It is not copied onto the installed disk, and the T2 installer never runs on these iMacs, so Wi-Fi never appears.
+The installer USB still has the firmware (it is there for T2 Macs). Omarchy never copies it onto the disk, and it never installs it on this iMac.
 
-Do not copy files onto the Omarchy ISO stick. That image is hybrid ISO9660; writing it can break boot.
+## What you need
 
-## One way
+1. Another computer with internet (the one you are reading this on).
+2. The USB stick you used to **install Omarchy**. Do not rewrite it.
+3. Any way to get one file onto the iMac (another USB stick, SD card, whatever).
 
-On a computer that has internet, put the installer on **any other FAT USB** (not the Omarchy ISO):
+## On this computer
 
-```bash
-git clone https://github.com/computeralex/imac19-wifi.git
-cd imac19-wifi
-./prepare-usb.sh "/Volumes/YOURSTICK"
-```
+Download [imac19-wifi-install.sh](https://raw.githubusercontent.com/computeralex/imac19-wifi/main/imac19-wifi-install.sh) and copy it onto a USB stick that is **not** the Omarchy installer.
 
-On a Mac you can double-click `Prepare USB.command` and pick that stick.
+## On the iMac
 
-On the iMac: plug that stick in, open Files, double-click **Install Wi-Fi**, type the password, Enter to shut down, then power on.
+1. Plug in the stick that has `imac19-wifi-install.sh`.
+2. Open Files, then a terminal in that folder, and run:
 
 ```bash
 sudo bash imac19-wifi-install.sh
 ```
 
-If double-click opens a text file: right-click **Install Wi-Fi** -> Run as a Program.
+3. When it asks, plug in the Omarchy **installer** USB (you can swap sticks) and press Enter.
+4. Type this computer's password. Nothing will show as you type.
+5. Press Enter to shut down. When the screen is black, press the power button.
 
-`prepare-usb.sh` downloads the same `apple-bcm-firmware` package Arch already ships and puts a 1 MB board tarball next to the script. This repo does not store Apple's firmware.
+If double-clicking **Install Wi-Fi** works, that is the same script. If it opens as text, right-click -> Run as a Program.
 
 ## After boot
 
