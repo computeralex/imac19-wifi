@@ -12,7 +12,7 @@ if [[ ${EUID} -ne 0 ]]; then
         case "$term" in
           xdg-terminal-exec) exec "$term" sudo "${cmd[@]}" ;;
           gnome-terminal|kgx) exec "$term" -- sudo "${cmd[@]}" ;;
-          xfce4-terminal) exec "$term" -e "sudo bash $0" ;;
+          xfce4-terminal) exec "$term" -e "sudo bash $(printf '%q' "$0")" ;;
           *) exec "$term" -e sudo "${cmd[@]}" ;;
         esac
       fi
@@ -151,9 +151,18 @@ find_apple_pkg() {
   return 1
 }
 
+safe_extract() {
+  local archive=$1 dest=$2
+  mkdir -p "$dest"
+  if tar --no-absolute-names --zstd -xf "$archive" -C "$dest" 2>/dev/null; then
+    return 0
+  fi
+  tar --no-absolute-names -xf "$archive" -C "$dest"
+}
+
 install_from_brcm_dir() {
   local src=$1
-  local f
+  local f srcfile
   mkdir -p "$FW"
   for f in \
     "brcmfmac4364b2-pcie.apple,${BOARD}.bin" \
@@ -162,8 +171,13 @@ install_from_brcm_dir() {
     "brcmfmac4364b2-pcie.apple,${BOARD}-HRPN-m.txt" \
     "brcmfmac4364b2-pcie.apple,${BOARD}-HRPN-u.txt"
   do
-    [[ -e "$src/$f" ]] || die "Firmware file missing in package: $f"
-    cp -L "$src/$f" "$FW/$f"
+    srcfile="$(readlink -f "$src/$f" 2>/dev/null || true)"
+    [[ -n "$srcfile" && -f "$srcfile" ]] || die "Firmware file missing in package: $f"
+    case "$srcfile" in
+      "$WORK"/*) ;;
+      *) die "Refusing to copy $f from outside the extract directory." ;;
+    esac
+    cp -L "$srcfile" "$FW/$f"
   done
 }
 
@@ -175,7 +189,7 @@ TAR="$HERE/firmware/${BOARD}.tar"
 if [[ -f "$TAR" ]]; then
   echo "  Using $TAR"
   mkdir -p "$WORK/from-tar"
-  tar -xf "$TAR" -C "$WORK/from-tar"
+  safe_extract "$TAR" "$WORK/from-tar"
   install_from_brcm_dir "$WORK/from-tar/usr/lib/firmware/brcm"
 else
   echo "  Need the USB stick you used to install Omarchy."
@@ -195,11 +209,7 @@ else
   done
   echo "  Found $PKG"
   mkdir -p "$WORK/pkg"
-  if tar --zstd -xf "$PKG" -C "$WORK/pkg" 2>/dev/null; then
-    :
-  else
-    tar -xf "$PKG" -C "$WORK/pkg"
-  fi
+  safe_extract "$PKG" "$WORK/pkg"
   install_from_brcm_dir "$WORK/pkg/usr/lib/firmware/brcm"
 fi
 
