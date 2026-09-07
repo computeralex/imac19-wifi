@@ -1,0 +1,4 @@
+Scripts in this repository are dedicated to the public domain (CC0-1.0).
+
+Apple / Broadcom Wi-Fi firmware is not included. prepare-usb.sh downloads it
+from the apple-bcm-firmware project at the time you build a USB stick.
