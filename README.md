@@ -2,37 +2,29 @@
 
 Offline installer for the Broadcom BCM4364 in the 2019 21.5-inch iMac (`iMac19,2`, nihau) and the 2019 27-inch iMac (`iMac19,1`, midway).
 
-Omarchy does not ship this firmware on non-T2 iMacs, so Wi-Fi never appears. This USB kit is the workaround. No ethernet needed on the iMac.
+Omarchy already carries `apple-bcm-firmware` on the **install USB** (offline package mirror, for T2 Macs). It never installs that package on a 2019 iMac, so Wi-Fi never appears. This script copies the board files off that same ISO.
 
-This repo does **not** contain Apple's firmware. `prepare-usb.sh` downloads it from the existing [apple-bcm-firmware](https://github.com/NoaHimesaka1873/apple-bcm-firmware) release (the same files Arch and t2linux already use) and copies a small installer onto a USB stick.
+This repo does **not** contain Apple's firmware.
 
-## Prepare a stick (working Mac or Linux, needs internet)
+## One file
 
-```bash
-git clone https://github.com/computeralex/imac19-wifi.git
-cd imac19-wifi
-chmod +x "Prepare USB.command" prepare-usb.sh
-./prepare-usb.sh "/Volumes/YOURSTICK"
-```
+Copy `imac19-wifi-install.sh` onto a USB stick. A Balena-written Omarchy ISO is often read-only, so use the EFI partition of that stick if it is writable, or any other FAT stick.
 
-On a Mac you can double-click `Prepare USB.command` and pick the stick in the folder dialog.
+On the iMac:
 
-## On the iMac (no internet)
-
-1. Plug in the stick.
-2. Open Files (folder icon, or Super+F).
-3. Double-click **Install Wi-Fi**.
-4. Type this computer's password (nothing will show as you type).
-5. Press Enter to shut down.
-6. When the screen is black, press the power button.
-
-If double-click opens a text file: right-click **Install Wi-Fi** → Run as a Program (or Allow Launching).
-
-Or open a terminal in the USB folder:
+1. Plug in the Omarchy install USB (and the stick with the script, if they are different).
+2. Open Files, double-click **Install Wi-Fi**, or in a terminal:
 
 ```bash
 sudo bash imac19-wifi-install.sh
 ```
+
+3. Type this computer's password (nothing will show as you type).
+4. Press Enter to shut down. When the screen is black, press the power button.
+
+The script looks for `apple-bcm-firmware` in the live ISO cache, then inside the install USB's squashfs (`/var/cache/omarchy/mirror/offline`). If you used `prepare-usb.sh`, it will use the small `firmware/*.tar` next to the script instead.
+
+If double-click opens a text file: right-click **Install Wi-Fi** -> Run as a Program (or Allow Launching).
 
 ## After boot
 

@@ -23,11 +23,12 @@ Or right-click empty space in the USB window -> Open in Terminal, then type:
 
   sudo bash imac19-wifi-install.sh
 
-Prepare this stick (on any Mac or PC with internet)
----------------------------------------------------
-On a computer that is online, from the imac19-wifi folder:
+Using the Omarchy install USB
+-----------------------------
+The firmware package is already on that stick (offline mirror). Copy
+imac19-wifi-install.sh onto it if the stick is writable (EFI partition),
+or onto any other USB. Plug the Omarchy install USB into the iMac and run
+the script. It will pull apple-bcm-firmware out of the ISO.
 
-  ./prepare-usb.sh "/Volumes/YOURSTICK"
-
-On a Mac you can double-click "Prepare USB.command" and pick the stick.
-Keep the firmware folder next to imac19-wifi-install.sh.
+If the Omarchy ISO is not plugged in, prepare-usb.sh can put a small
+firmware folder next to this script instead.
