@@ -2,3 +2,4 @@ wifi-firmware/
 usb-kit/firmware/*.tar
 .firmware-cache/
 .DS_Store
+thread.txt

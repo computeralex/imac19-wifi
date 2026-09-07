@@ -4,7 +4,7 @@ You installed Omarchy on a 2019 iMac. Wi-Fi does not show up. That is expected.
 
 Keep this where you can see it if you cannot memorize it. The iMac cannot load this page until Wi-Fi works.
 
-On a Mac keyboard, **Super** is the Command key (next to the spacebar).
+On a Mac keyboard, Super is ⌘.
 
 ## 1. Download `wifi.sh`
 
@@ -17,13 +17,13 @@ You also need the USB stick you used to **install Omarchy**. Do not rewrite that
 ## 2. Drag it to Home
 
 1. Plug in the stick that has `wifi.sh`.
-2. Press **Command + Shift + F**. Files opens.
+2. Press **Super (⌘) + Shift + F**. Files opens.
 3. Click the USB stick in the left sidebar.
 4. Drag `wifi.sh` onto **Home** (the house icon).
 
 ## 3. Run it
 
-1. Press **Command + Return**. A terminal opens.
+1. Press **Super (⌘) + Return**. A terminal opens.
 2. Type this and press Return:
 
 ```bash
@@ -40,4 +40,4 @@ If it cannot find it, try another port and press Return again.
 
 When it says done, press Return. The iMac shuts down. Screen black, then press the power button.
 
-Wi-Fi: **Command + Ctrl + W**.
+Wi-Fi: **Super (⌘) + Ctrl + W**.
