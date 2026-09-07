@@ -1,43 +1,46 @@
 # 2019 iMac Wi-Fi for Omarchy
 
-You installed Omarchy on a 2019 iMac. Wi-Fi does not show up. That is expected.
-
-Keep this where you can see it if you cannot memorize it. The iMac cannot load this page until Wi-Fi works.
+Wi-Fi does not appear after installing Omarchy on a 2019 21.5-inch or 27-inch iMac (`iMac19,2` / `iMac19,1`). This script installs the Broadcom firmware from the Omarchy ISO.
 
 On a Mac keyboard, Super is ⌘.
+
+## Requirements
+
+1. Your Omarchy Quattro installation medium
+2. An extra USB stick
+
+Do not rewrite or re-flash the Omarchy installer.
 
 ## 1. Download `wifi.sh`
 
 https://raw.githubusercontent.com/computeralex/imac19-wifi/main/wifi.sh
 
-Put it on a USB stick, top level, not in a folder.
-
-You also need the USB stick you used to **install Omarchy**. Do not rewrite that one.
+Copy it to the extra USB stick, top level, not inside a folder.
 
 ## 2. Drag it to Home
 
-1. Plug in the stick that has `wifi.sh`.
-2. Press **Super (⌘) + Shift + F**. Files opens.
-3. Click the USB stick in the left sidebar.
-4. Drag `wifi.sh` onto **Home** (the house icon).
+1. Plug in the extra stick.
+2. **Super (⌘) + Shift + F** opens Files.
+3. Select the USB stick in the left sidebar.
+4. Drag `wifi.sh` onto **Home**.
 
 ## 3. Run it
 
-1. Press **Super (⌘) + Return**. A terminal opens.
-2. Type this and press Return:
+1. **Super (⌘) + Return** opens a terminal.
+2. Run:
 
 ```bash
 sudo bash ~/wifi.sh
 ```
 
-Type the password you chose at install. Nothing will appear as you type. Press Return.
+Enter the user password from install. sudo does not echo keystrokes.
 
-## 4. Plug in the Omarchy installer USB
+## 4. Plug in the Omarchy installer
 
-When it asks, unplug the first stick if you need the port, plug in the **Omarchy installer** USB, press Return.
+When the script asks, plug in the Omarchy Quattro installation medium (swap sticks if you are short on ports) and press Return.
 
-If it cannot find it, try another port and press Return again.
+If it cannot find the firmware package, reseat the installer and press Return again.
 
-When it says done, press Return. The iMac shuts down. Screen black, then press the power button.
+When it finishes, press Return to shut down. Power on after the screen goes black.
 
-Wi-Fi: **Super (⌘) + Ctrl + W**.
+Network panel: **Super (⌘) + Ctrl + W**.
